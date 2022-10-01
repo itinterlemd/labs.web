@@ -8,6 +8,7 @@ import {
 
 import { Hero } from '../models/hero';
 import { HeroService } from '../services/hero.service';
+import { OnLoadProcessService } from '../services/on-load-process.service';
 
 @Component({
   selector: 'app-hero-search',
@@ -18,11 +19,15 @@ export class HeroSearchComponent implements OnInit {
   heroes$!: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private loadProcessService: OnLoadProcessService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
+    console.log("search---->")
+    this.loadProcessService.showLoading();
+    //debounceTime(5000);
     this.searchTerms.next(term);
+    this.loadProcessService.hideLoading();
   }
 
   ngOnInit(): void {
