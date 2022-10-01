@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "demo-react-app"
+		},
+		{
+			"path": "test-admin"
+		},
+		{
+			"path": "angular"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,30 @@
+services:
+  server-mysql:
+    image: mysql:8.0.28
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=crud
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+    volumes:
+      - dbmysql:/var/lib/mysql
+  
+  server-postgresql:
+    image: postgres:14.2
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - dbpostgres:/var/lib/mysql
+
+
+# Names our volume
+volumes:
+  dbmysql:
+  dbpostgres:
+      
+ 
