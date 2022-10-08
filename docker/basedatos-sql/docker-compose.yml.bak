@@ -19,7 +19,7 @@ services:
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - dbpostgres:/var/lib/postgresql
+      - dbpostgres:/var/lib/mysql
 
 
 # Names our volume

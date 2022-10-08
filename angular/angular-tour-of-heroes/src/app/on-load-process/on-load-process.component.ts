@@ -9,15 +9,14 @@ import { OnLoadProcessService } from '../services/on-load-process.service';
 })
 export class OnLoadProcessComponent implements OnInit {
 
-  processActive!: Boolean;
-  subscription!: Subscription;
+  processActive: Boolean = false;
+  subscription: Subscription = new Subscription;
  
    constructor(public loadingService:OnLoadProcessService) { }
  
    ngOnInit(): void {
      this.subscribeToLoadings();
      console.log("subscribeToLoadings---> ",this.processActive);
-     this.processActive;
      console.log("subscribeToLoadings");
    }
 

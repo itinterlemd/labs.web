@@ -21,15 +21,6 @@ export class HeroSearchComponent implements OnInit {
 
   constructor(private heroService: HeroService, private loadProcessService: OnLoadProcessService) {}
 
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    console.log("search---->")
-    this.loadProcessService.showLoading();
-    //debounceTime(5000);
-    this.searchTerms.next(term);
-    this.loadProcessService.hideLoading();
-  }
-
   ngOnInit(): void {
     this.heroes$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
@@ -41,5 +32,14 @@ export class HeroSearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.heroService.searchHeroes(term)),
     );
+  }
+
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    console.log("search---->")
+    this.loadProcessService.showLoading();
+    //debounceTime(5000);
+    this.searchTerms.next(term);
+    //this.loadProcessService.hideLoading();
   }
 }
