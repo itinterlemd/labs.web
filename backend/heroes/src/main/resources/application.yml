@@ -5,7 +5,7 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/heroes_db
+    url: jdbc:postgresql://localhost:5432/heroes_db2
     username: postgres
     password: 
   # JPA properties
