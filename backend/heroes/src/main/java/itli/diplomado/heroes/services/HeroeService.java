@@ -1,6 +1,7 @@
 package itli.diplomado.heroes.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,12 +67,14 @@ public class HeroeService {
     }
     
     public Heroe findById(int id){    
+        Optional<Heroe> e=heroeRepository.findById(id);
         
-        Heroe e= heroeRepository.findById(id).get();
-           if( e.getTipos()!=null && e.getTipos().isEmpty())
-               System.out.println(e.getTipos());
+        e.ifPresent((value)->{
+            System.out.println("Heore tipos : " + value.getTipos().size());
+        });
                
-        return e;
+        // heroeRepository.findById(id).map(Heroe::getTipos);
+        return e.get();
     }
     
 }

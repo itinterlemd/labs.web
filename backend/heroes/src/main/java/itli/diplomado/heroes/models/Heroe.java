@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +39,7 @@ public class Heroe implements Serializable{
     @JoinColumn(name = "PODER_ID", foreignKey = @ForeignKey(name = "FK_HEROE_PODER"))
     private Poder poder;
     
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(name = "REL_HEROE_TIPO",
             joinColumns = { @JoinColumn(name = "HEROE_ID") },
             inverseJoinColumns = { @JoinColumn(name = "TIPO_ID") })
