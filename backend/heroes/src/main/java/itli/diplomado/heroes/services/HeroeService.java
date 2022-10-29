@@ -32,6 +32,9 @@ public class HeroeService {
     public Heroe save(Heroe heroe) {
         
          heroeRepository.save(heroe);
+         heroe = heroeRepository.findById(heroe.getId()).get();
+         System.out.println(heroe.getPoder());
+         
          return heroe;
     }
     
@@ -51,6 +54,24 @@ public class HeroeService {
      */
     public Heroe update(Heroe heroe) {
         return heroeRepository.save(heroe);
+    }
+    
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public boolean existsById(int id){
+        return heroeRepository.existsById(id);
+    }
+    
+    public Heroe findById(int id){    
+        
+        Heroe e= heroeRepository.findById(id).get();
+           if( e.getTipos()!=null && e.getTipos().isEmpty())
+               System.out.println(e.getTipos());
+               
+        return e;
     }
     
 }
