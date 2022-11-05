@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import itli.diplomado.heroes.models.Heroe;
+import itli.diplomado.heroes.models.Poder;
 import itli.diplomado.heroes.repository.HeroeRepository;
+import itli.diplomado.heroes.repository.PoderRepository;
 
 @Service
 @Transactional(noRollbackFor = Exception.class)
@@ -17,12 +19,20 @@ public class HeroeService {
     @Autowired
     HeroeRepository heroeRepository;
     
+    @Autowired
+    PoderRepository poderRepository;
+
+    
     /**
      * Consulta todos los heroes
      * @return
      */
-    public List<Heroe> getList(){        
-        return heroeRepository.findAll();                
+    public List<Heroe> getList(){  
+        
+        List<Heroe> herolesList= heroeRepository.findAll();        
+        herolesList.stream().forEach(heroe -> heroe.getPoderes().size());
+        
+        return herolesList;                
     }
     
     /**
@@ -32,9 +42,18 @@ public class HeroeService {
      */
     public Heroe save(Heroe heroe) {
         
-         heroeRepository.save(heroe);
-         heroe = heroeRepository.findById(heroe.getId()).get();
-         System.out.println(heroe.getPoder());
+        heroeRepository.save(heroe);
+       /* Heroe newHeroe = new Heroe();
+        newHeroe.setName(heroe.getName());
+        newHeroe.setTipo(heroe.getTipo());
+        
+        heroe.getPoderes().stream().forEach(poder -> 
+                            newHeroe.getPoderes().add( poderRepository.getReferenceById(poder.getId()))
+                        );        
+         
+        heroeRepository.save(heroe);*/
+         //heroe = heroeRepository.findById(heroe.getId()).get();
+         //System.out.println(heroe.getTipo());
          
          return heroe;
     }
@@ -70,7 +89,7 @@ public class HeroeService {
         Optional<Heroe> e=heroeRepository.findById(id);
         
         e.ifPresent((value)->{
-            System.out.println("Heore tipos : " + value.getTipos().size());
+            System.out.println("Heore Poderes : " + value.getPoderes().size());
         });
                
         // heroeRepository.findById(id).map(Heroe::getTipos);

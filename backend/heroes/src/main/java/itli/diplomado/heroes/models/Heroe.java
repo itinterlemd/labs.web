@@ -33,41 +33,60 @@ public class Heroe implements Serializable{
     private Integer id; //el nombre no necesariamente es igual
     
     @Column(name="NAME")
-    private String name;
+    private String name;   
+    
+    @ManyToMany() //cascade = { CascadeType.ALL }
+    @JoinTable(name = "REL_HEROE_PODERES",
+            joinColumns = { @JoinColumn(name = "HEROE_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "PODER_ID") })
+    private Set<Poder> poderes = new HashSet<Poder>(); 
+        
     
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "PODER_ID", foreignKey = @ForeignKey(name = "FK_HEROE_PODER"))
-    private Poder poder;
-    
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "REL_HEROE_TIPO",
-            joinColumns = { @JoinColumn(name = "HEROE_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "TIPO_ID") })
-    private Set<Tipo> tipos = new HashSet<Tipo>(); 
-    
-    
-    public Set<Tipo> getTipos() {
-        return tipos;
-    }
-    public void setTipos(Set<Tipo> tipos) {
-        this.tipos = tipos;
-    }
-    public Poder getPoder() {
-        return poder;
-    }
-    public void setPoder(Poder poder) {
-        this.poder = poder;
-    }
+    @JoinColumn(name = "PODER_ID", foreignKey = @ForeignKey(name = "FK_HEROE_TIPO"))
+    private Tipo tipo;
+
+
     public Integer getId() {
         return id;
     }
+
+
     public void setId(Integer id) {
         this.id = id;
     }
+
+
     public String getName() {
         return name;
     }
+
+
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public Set<Poder> getPoderes() {
+        return poderes;
+    }
+
+
+    public void setPoderes(Set<Poder> poderes) {
+        this.poderes = poderes;
+    }
+
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+    
+  
 }
