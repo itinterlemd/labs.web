@@ -18,7 +18,7 @@ export class HeroService {
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
 
-    private heroesUrl = 'https://6341801020f1f9d7997488bb.mockapi.io/api/v1/heroes';  // URL to web api
+    private heroesUrl = 'http://localhost:8080/api/v1/heroes';  // URL to web api
 
     /** Log a HeroService message with the MessageService */
     private log(message: string) {
@@ -66,8 +66,8 @@ export class HeroService {
     deleteHero(id: number): Observable<Hero> {
       const url = `${this.heroesUrl}/${id}`;
 
-      return this.http.delete<Hero>(url, this.httpOptions).pipe(
-        tap(_ => this.log(`deleted hero id=${id}`)),
+      return this.http.delete<any>(url, this.httpOptions).pipe(
+        tap(_response => this.log(`deleted hero id=${_response?.mensaje}`)),
         catchError(this.handleError<Hero>('deleteHero'))
       );
 

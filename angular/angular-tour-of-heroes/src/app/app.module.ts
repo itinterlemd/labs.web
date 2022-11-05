@@ -15,6 +15,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { OnLoadProcessComponent } from './on-load-process/on-load-process.component';
 import { OnLoadProcessService } from './services/on-load-process.service';
+import { NgMultiSelectDropDownModule, } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { OnLoadProcessService } from './services/on-load-process.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot(),
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.

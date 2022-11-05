@@ -5,6 +5,17 @@
     <div>
       <label for="hero-name">Hero name: </label>
       <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+      
+<p>
+      <select name="miselect" [(ngModel)]="poderesSeleccionados" multiple="multiple">
+        <option [value]="poder" *ngFor="let poder of listaPoderes">{{poder.name}}</option>
+      </select>
+        </p>
+        <ul>
+          <li *ngFor="let poder of poderesSeleccionados">
+            {{poder.name}}
+          </li>
+        </ul>
     </div>
     <button type="button" (click)="goBack()">go back</button>
 
